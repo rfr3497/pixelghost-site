@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>PixelGhost Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("Wcj4sqRHYTA6Ie96j"); // public key
+    })();
+
+    function sendEmail(e) {
+      e.preventDefault();
+      emailjs.sendForm('service_kr029aa', 'template_kvfwnrt', e.target)
+        .then(() => alert('درخواست شما ارسال شد!'), 
+              (error) => alert('خطا: ' + error.text));
+      e.target.reset();
+    }
+  </script>
+</head>
+<body>
+
+  <header>
+    <div class="ghost">👻</div>
+    <h1>PixelGhost Studio</h1>
+    <p>آژانس دیجیتال یک‌نفره، بی‌صدا و خودکار</p>
+  </header>
+
+  <section>
+    <h2>درباره ما</h2>
+    <p>در PixelGhost همه‌چیز بدون جلسه، بدون تماس و بدون مزاحمت انجام می‌شود. تنها کافی است فرم سفارش را پر کنید، مابقی را ما انجام می‌دهیم.</p>
+  </section>
+
+  <section>
+    <h2>نمونه‌کارها</h2>
+    <div class="portfolio">
+      <img src="https://via.placeholder.com/300x200?text=نمونه+1" alt="نمونه 1">
+      <img src="https://via.placeholder.com/300x200?text=نمونه+2" alt="نمونه 2">
+    </div>
+  </section>
+
+  <section>
+    <h2>فرم سفارش</h2>
+    <form onsubmit="sendEmail(event)">
+      <input type="text" name="user_name" placeholder="نام کامل" required>
+      <input type="email" name="user_email" placeholder="ایمیل شما" required>
+      <textarea name="message" rows="5" placeholder="نوع پروژه یا توضیح مختصر" required></textarea>
+      <button type="submit">ارسال درخواست</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>ارتباط با ما در شبکه‌های اجتماعی:</p>
+    <div class="social">
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+      <a href="https://t.me" target="_blank">Telegram</a>
+      <a href="mailto:rfr3497@gmail.com">Email</a>
+    </div>
+    <p>&copy; 2025 PixelGhost. همه حقوق محفوظ است.</p>
+  </footer>
+
+</body>
+</html>
