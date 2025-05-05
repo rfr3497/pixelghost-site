@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>سفارش طراحی لوگو - PixelGhost</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Vazirmatn', sans-serif;
+      background: #0d0d0d;
+      color: #f0f0f0;
+      line-height: 1.8;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #00ffc8;
+      margin-bottom: 30px;
+    }
+    form {
+      max-width: 600px;
+      margin: auto;
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #00ffc8;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 12px 0;
+      border: none;
+      border-radius: 8px;
+      background: #0f0f0f;
+      color: #fff;
+    }
+    button {
+      background: #00ffc8;
+      color: #000;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+    }
+    a.back {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #00ffc8;
+      text-decoration: none;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("Wcj4sqRHYTA6Ie96j");
+    })();
+
+    function sendEmail(e) {
+      e.preventDefault();
+      emailjs.sendForm('service_kr029aa', 'template_kvfwnrt', e.target)
+        .then(() => alert('درخواست شما ارسال شد!'), 
+              (error) => alert('خطا: ' + error.text));
+      e.target.reset();
+    }
+  </script>
+</head>
+<body>
+  <h1>سفارش طراحی لوگو</h1>
+  <form onsubmit="sendEmail(event)">
+    <input type="text" name="user_name" placeholder="نام کامل" required>
+    <input type="email" name="user_email" placeholder="ایمیل شما" required>
+    <textarea name="message" rows="5" placeholder="چه نوع لوگویی مد نظر دارید؟" required></textarea>
+    <button type="submit">ارسال سفارش</button>
+  </form>
+  <a class="back" href="index.html">بازگشت به صفحه اصلی</a>
+</body>
+</html>
