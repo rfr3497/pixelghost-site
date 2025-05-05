@@ -1,106 +1,168 @@
 
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>PixelGhost Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      margin: 0;
-      font-family: sans-serif;
+      font-family: 'Vazirmatn', sans-serif;
       background: #0d0d0d;
-      color: #f2f2f2;
-      direction: rtl;
+      color: #f0f0f0;
+      line-height: 1.8;
+      scroll-behavior: smooth;
     }
-    header, footer {
-      background: #111;
-      padding: 1rem;
+
+    header {
+      background: linear-gradient(135deg, #00ffc8, #00665f);
+      padding: 60px 20px;
+      text-align: center;
+      color: #000;
+    }
+
+    header h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1.2em;
+    }
+
+    .ghost {
+      font-size: 5em;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    section {
+      max-width: 900px;
+      margin: auto;
+      padding: 60px 20px;
       text-align: center;
     }
-    nav a {
-      margin: 0 1rem;
-      color: #ccc;
-      text-decoration: none;
+
+    section h2 {
+      font-size: 2em;
+      color: #00ffc8;
+      margin-bottom: 20px;
     }
-    nav a:hover {
-      color: white;
-    }
-    .container {
-      padding: 2rem;
-      max-width: 800px;
-      margin: auto;
-    }
-    form input, form textarea, form button {
-      display: block;
+
+    .portfolio img {
       width: 100%;
-      margin: 1rem 0;
-      padding: .8rem;
-      font-size: 1rem;
+      max-width: 300px;
+      margin: 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #00ffc8;
     }
-    form button {
-      background: #444;
-      color: white;
+
+    form {
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #00ffc8;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
       border: none;
+      border-radius: 8px;
+      background: #0f0f0f;
+      color: #fff;
+    }
+
+    button {
+      background: #00ffc8;
+      color: #000;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
       cursor: pointer;
     }
-    form button:hover {
-      background: #666;
+
+    footer {
+      background: #111;
+      padding: 30px;
+      text-align: center;
+      font-size: 0.9em;
+    }
+
+    .social a {
+      margin: 0 10px;
+      color: #00ffc8;
+      text-decoration: none;
+      font-size: 1.4em;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 2em; }
     }
   </style>
-</head>
-<body>
-  <header>
-    <h1>PixelGhost Studio</h1>
-    <nav>
-      <a href="#about">درباره</a>
-      <a href="#services">خدمات</a>
-      <a href="#contact">سفارش</a>
-    </nav>
-  </header>
-
-  <div class="container">
-    <section id="about">
-      <h2>درباره ما</h2>
-      <p>آژانس دیجیتال یک‌نفره با اتوماسیون کامل. بدون جلسه، بدون تماس، فقط نتیجه.</p>
-    </section>
-
-    <section id="services">
-      <h2>خدمات</h2>
-      <ul>
-        <li>طراحی سایت سریع و سبک</li>
-        <li>مدیریت محتوای خودکار</li>
-        <li>راه‌اندازی برند و سیستم سفارش بدون تعامل</li>
-      </ul>
-    </section>
-
-    <section id="contact">
-      <h2>ثبت سفارش</h2>
-      <form id="order-form">
-        <input type="text" name="user_name" placeholder="نام شما" required />
-        <input type="email" name="user_email" placeholder="ایمیل" required />
-        <textarea name="message" placeholder="توضیحات سفارش..." required></textarea>
-        <button type="submit">ارسال</button>
-      </form>
-    </section>
-  </div>
-
-  <footer>
-    <p>© 2025 PixelGhost Studio</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
   <script>
-    (function(){
-      emailjs.init("Wcj4sqRHYTA6Ie96j");
+    (function() {
+      emailjs.init("Wcj4sqRHYTA6Ie96j"); // public key
     })();
 
-    document.getElementById("order-form").addEventListener("submit", function(e) {
+    function sendEmail(e) {
       e.preventDefault();
-      emailjs.sendForm("service_kr029aa", "template_kvfwnrt", this)
-        .then(() => alert("سفارش شما با موفقیت ارسال شد!"))
-        .catch(() => alert("خطا در ارسال. لطفاً دوباره تلاش کنید."));
-    });
+      emailjs.sendForm('service_kr029aa', 'template_kvfwnrt', e.target)
+        .then(() => alert('درخواست شما ارسال شد!'), 
+              (error) => alert('خطا: ' + error.text));
+      e.target.reset();
+    }
   </script>
+</head>
+<body>
+
+  <header>
+    <div class="ghost">👻</div>
+    <h1>PixelGhost Studio</h1>
+    <p>آژانس دیجیتال یک‌نفره، بی‌صدا و خودکار</p>
+  </header>
+
+  <section>
+    <h2>درباره ما</h2>
+    <p>در PixelGhost همه‌چیز بدون جلسه، بدون تماس و بدون مزاحمت انجام می‌شود. تنها کافی است فرم سفارش را پر کنید، مابقی را ما انجام می‌دهیم.</p>
+  </section>
+
+  <section>
+    <h2>نمونه‌کارها</h2>
+    <div class="portfolio">
+      <img src="https://via.placeholder.com/300x200?text=نمونه+1" alt="نمونه 1">
+      <img src="https://via.placeholder.com/300x200?text=نمونه+2" alt="نمونه 2">
+    </div>
+  </section>
+
+  <section>
+    <h2>فرم سفارش</h2>
+    <form onsubmit="sendEmail(event)">
+      <input type="text" name="user_name" placeholder="نام کامل" required>
+      <input type="email" name="user_email" placeholder="ایمیل شما" required>
+      <textarea name="message" rows="5" placeholder="نوع پروژه یا توضیح مختصر" required></textarea>
+      <button type="submit">ارسال درخواست</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>ارتباط با ما در شبکه‌های اجتماعی:</p>
+    <div class="social">
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+      <a href="https://t.me" target="_blank">Telegram</a>
+      <a href="mailto:rfr3497@gmail.com">Email</a>
+    </div>
+    <p>&copy; 2025 PixelGhost. همه حقوق محفوظ است.</p>
+  </footer>
+
 </body>
 </html>
