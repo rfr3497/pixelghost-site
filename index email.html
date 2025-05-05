@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PixelGhost Studio</title>
+</head>
+<body style="background:#111;color:#eee;font-family:sans-serif;padding:2rem">
+  <h1>فرم سفارش</h1>
+  <form id="contact-form" style="display:flex;flex-direction:column;max-width:400px">
+    <input type="text" name="from_name" placeholder="نام شما" required style="margin:5px;padding:10px"/>
+    <input type="email" name="reply_to" placeholder="ایمیل شما" required style="margin:5px;padding:10px"/>
+    <textarea name="message" placeholder="سفارش یا توضیحات شما" required style="margin:5px;padding:10px"></textarea>
+    <button type="submit" style="margin:5px;padding:10px;background:#333;color:white;border:none">ارسال</button>
+  </form>
+
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("Wcj4sqRHYTA6Ie96j");
+    })();
+
+    function sendEmail(e) {
+      e.preventDefault();
+      emailjs.sendForm('service_kr029aa', 'template_kvfwnrt', this)
+        .then(function() {
+          alert('پیام با موفقیت ارسال شد!');
+        }, function(error) {
+          alert('خطا در ارسال: ' + JSON.stringify(error));
+        });
+    }
+
+    document.getElementById('contact-form').addEventListener('submit', sendEmail);
+  </script>
+</body>
+</html>
